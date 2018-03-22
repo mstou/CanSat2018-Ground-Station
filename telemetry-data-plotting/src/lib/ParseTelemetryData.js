@@ -1,0 +1,4 @@
+
+const parseData = (telemetryData) => {
+  
+}
