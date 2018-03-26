@@ -11,7 +11,7 @@ const SinglePlot = ({dataToPlot,packets,title}) => (
       mode: 'lines+points',
       marker: {color: 'red'},
     }]}
-  layout={{width: 420, height: 400, title: 'Height'}}
+  layout={{width: 420, height: 400, title: title }}
 /> );
 
 

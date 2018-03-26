@@ -5,7 +5,7 @@ dataToPrint = []
 quote = "\""
 
 while (73):
-    telemetryPackage = serialPort.readline()
+    telemetryPackage = serialPort.readline() #waits indefinetly for the next packet
     telemetryPackage = quote + telemetryPackage[:-2] + quote
     #add "," to current last element.
     if (len(dataToPrint) > 0):
