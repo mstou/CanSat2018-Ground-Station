@@ -28,7 +28,7 @@ class Telemetry extends Component {
         />
 
         <SinglePlot
-          dataToPlot={x2  }
+          dataToPlot={x2}
           packets={y}
           title="Random Title"
         />
