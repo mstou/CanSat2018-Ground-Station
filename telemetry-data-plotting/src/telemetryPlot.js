@@ -5,13 +5,23 @@ import {initialState, parseData} from './lib';
 class Telemetry extends Component {
   constructor(props) {
     super(props);
+
     this.state = initialState();
+
     setInterval(() => {
       fetch('http://localhost:3000/TelemetryData.json')
-      .then(response => response.json())
+      .then(response => {
+         try{
+           return response.json();
+         }catch (e) {
+          return Promise.reject();
+        }
+      })
       .then( telemetryData => {
-        // console.log(telemetryData);
-        this.setState(parseData(this.state,telemetryData))});
+        console.log(telemetryData);
+        this.setState(parseData(this.state,telemetryData))
+      })
+      .catch(() => {});
     }, 1000);
   }
 
