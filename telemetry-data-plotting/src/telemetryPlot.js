@@ -18,7 +18,8 @@ class Telemetry extends Component {
         }
       })
       .then( telemetryData => {
-         this.setState(parseJSON(this.state,telemetryData))
+         const newState = parseJSON(this.state,telemetryData);
+         this.setState(newState);
          //console.log(parseJSON(this.state,telemetryData));
       })
       .catch(() => {});
@@ -26,21 +27,23 @@ class Telemetry extends Component {
   }
 
   render() {
-    const x1 = [2, 6, 3, 8, 9, 11, 12, 13, 18, 12, 19, 21, 22, 32, 33];
-    const x2 = [73, 74, 75, 76, 77, 78, 79, 80, 90, 100, 111, 123, 122, 110, 73];
-    const y = [1, 2, 3, 5, 6, 8, 9, 10, 11, 12, 17, 20, 23, 24, 25];
+    // const x1 = [2, 6, 3, 8, 9, 11, 12, 13, 18, 12, 19, 21, 22, 32, 33];
+    // const x2 = [73, 74, 75, 76, 77, 78, 79, 80, 90, 100, 111, 123, 122, 110, 73];
+    // const y = [1, 2, 3, 5, 6, 8, 9, 10, 11, 12, 17, 20, 23, 24, 25];
     return (
       <div id="plots">
         <SinglePlot
-          dataToPlot={x1}
-          packets={y}
-          title="Height"
+          dataToPlot={this.state.Pressure.data}
+          packets={this.state.packets.data}
+          title="Barometric Pressure"
+          units={this.state.Pressure.units}
         />
 
         <SinglePlot
-          dataToPlot={x2}
-          packets={y}
-          title="Random Title"
+          dataToPlot={this.state.Height.data}
+          packets={this.state.packets.data}
+          title="Height"
+          units={this.state.Height.units}
         />
       </div>
     );

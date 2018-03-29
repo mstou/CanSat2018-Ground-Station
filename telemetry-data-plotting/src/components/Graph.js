@@ -16,7 +16,7 @@ const SinglePlot = ({dataToPlot, packets, title, units}) => (
       height: 400,
       title: title,
       yaxis: { title: `(${units})`},
-      xaxis: { title: "time(s)"},
+      xaxis: { title: "time (s)"},
     }}
   /> );
 
