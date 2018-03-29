@@ -18,36 +18,46 @@ const packetIsValid = (packet) => (
   .reduce( (sum, currentValue) => sum + currentValue ) === packet[packet.length-1] //check sum
 );
 
-const parseData = (state, telemetryPackets) => {
+
+const parsePacket1 = (state,packet) => {
   //<PACKET_COUNT>,<STATUS>,<LATITUDE>,<LONGTITUDE>,<ALTITUDE>,<PRESSURE>,<TEMPERATURE>,<CHECK_SUM>
-  const packetData = telemetryPackets[telemetryPackets.length-1].split(",");
-  if(!packetIsValid(packetData[packetData.length-1])){
-    return state;
-  }
   return Object.freeze({
     ...state,
     Height: {
       ...state.Height,
-      data: [...state.Height.data,packetData[4]]
+      data: [...state.Height.data,packet[4]]
     },
     Longtitude: {
       ...state.Longtitude,
-      data: [...state.Longtitude.data,packetData[3]]
+      data: [...state.Longtitude.data,packet[3]]
     },
     Latitude: {
       ...state.Latitude,
-      data: [...state.Latitude.data,packetData[2]]
+      data: [...state.Latitude.data,packet[2]]
     },
     Pressure: {
-      ...state.Longtitude,
-      data: [...state.Longtitude.data,packetData[3]]
+      ...state.Pressure,
+      data: [...state.Pressure.data,packet[5]]
     },
     Temperature: {
-      ...state.Longtitude,
-      data: [...state.Temperature.data,packetData[6]]
+      ...state.Temperature,
+      data: [...state.Temperature.data,packet[6]]
     },
 
   });
+}
+const parseData = (state, telemetryPackets) => {
+
+  const packetData = telemetryPackets[telemetryPackets.length-1]
+  .split(",")
+  .map((item) => parseFloat(item));
+
+  if(!packetIsValid(packetData)){
+    console.log("invalid packet");
+    return state;
+  }
+
+  return parsePacket1(state,packetData);
 
 };
 

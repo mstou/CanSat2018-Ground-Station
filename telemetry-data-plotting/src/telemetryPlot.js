@@ -18,8 +18,8 @@ class Telemetry extends Component {
         }
       })
       .then( telemetryData => {
-        console.log(telemetryData);
-        this.setState(parseData(this.state,telemetryData))
+        //console.log(parseData(this.state,telemetryData));
+         this.setState(parseData(this.state,telemetryData))
       })
       .catch(() => {});
     }, 1000);
