@@ -14,13 +14,13 @@ const initialState = () => {
 }
 
 const packetIsValid = (packet) => (
-  packet.slice(2,packet.length-1)
+  packet.slice(0,packet.length-1)
   .reduce( (sum, currentValue) => sum + currentValue ) === packet[packet.length-1] //check sum
 );
 
 
 const parsePacket1 = (state,packet) => {
-  //<PACKET_COUNT>,<STATUS>,<LATITUDE>,<LONGTITUDE>,<ALTITUDE>,<PRESSURE>,<TEMPERATURE>,<CHECK_SUM>
+  //<PACKET_COUNT>,1,<LATITUDE>,<LONGTITUDE>,<ALTITUDE>,<PRESSURE>,<TEMPERATURE>,<CHECK_SUM>
   return Object.freeze({
     ...state,
     Height: {
@@ -43,22 +43,63 @@ const parsePacket1 = (state,packet) => {
       ...state.Temperature,
       data: [...state.Temperature.data,packet[6]]
     },
-
+    packets: {
+      data: [...state.packets.data,packet[0]]
+    }
   });
 }
-const parseData = (state, telemetryPackets) => {
 
-  const packetData = telemetryPackets[telemetryPackets.length-1]
-  .split(",")
-  .map((item) => parseFloat(item));
+const parsePacket2 = (state,packet) => {
+  //<PACKET_COUNT>,2,<LATITUDE>,<LONGTITUDE>,<UV_RADIATION>,<SOIL MOISTURE>,<CHK_SUM>
+  return Object.freeze({
+    ...state,
+    Latitude : {
+      ...state.Latitude,
+      data : [...state.Latitude.data,packet[2]]
+    },
+    Longtitude : {
+      ...state.Longtitude,
+      data : [...state.Longtitude.data,packet[3]]
+    },
+    UV_Radiation : {
+      ...state.UV_Radiation,
+      data : [...state.UV_Radiation.data,packet[4]]
+    },
+    Soil_Moisture : {
+      ...state.Soil_Moisture,
+      data : [...state.Soil_Moisture.data,packet[5]]
+    },
+    packets: {
+      data: [...state.packets.data,packet[0]]
+    }
+  });
+}
 
-  if(!packetIsValid(packetData)){
-    console.log("invalid packet");
+const parseData = (state, packet) => {
+  if(!packetIsValid(packet)){
+    console.log("Invalid packet");
     return state;
   }
 
-  return parsePacket1(state,packetData);
+  return (packet[1]===1) ? parsePacket1(state,packet) : parsePacket2(state,packet);
 
 };
 
-export {initialState, parseData};
+const parseJSON = (state, packets) => {
+
+  const newPackets = packets.map(
+    (packetAsString) =>
+    packetAsString.split(",")
+    .map((value) => parseFloat(value))
+  )
+  .filter( (packet) => {
+    return (state.packets.data.length===0) || (packet[0] > state.packets.data[state.packets.data.length-1]);
+  });
+  return Object.freeze(
+    newPackets.reduce(
+    (intermediateState,newPacket) => parseData(intermediateState,newPacket),
+    state
+  ));
+}
+
+export {initialState, parseJSON};

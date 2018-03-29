@@ -1,6 +1,6 @@
 import React , {Component} from 'react';
 import {SinglePlot} from './components';
-import {initialState, parseData} from './lib';
+import {initialState, parseJSON} from './lib';
 
 class Telemetry extends Component {
   constructor(props) {
@@ -18,8 +18,8 @@ class Telemetry extends Component {
         }
       })
       .then( telemetryData => {
-        //console.log(parseData(this.state,telemetryData));
-         this.setState(parseData(this.state,telemetryData))
+         this.setState(parseJSON(this.state,telemetryData))
+         //console.log(parseJSON(this.state,telemetryData));
       })
       .catch(() => {});
     }, 1000);

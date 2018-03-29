@@ -1,2 +1,2 @@
-import {initialState, parseData} from './ParseTelemetryData';
-export {initialState, parseData};
+import {initialState, parseJSON} from './ParseTelemetryData';
+export {initialState, parseJSON};
