@@ -14,10 +14,12 @@ const initialState = () => {
   });
 }
 
-const packetIsValid = (packet) => (
-  packet.slice(0,packet.length-1)
-  .reduce( (sum, currentValue) => sum + currentValue ) === packet[packet.length-1] //check sum
-);
+const packetIsValid = (packet) => {
+
+  const packetSum = packet.slice(0,packet.length-1)
+  .reduce( (sum, currentValue) => sum + currentValue );
+  return Math.abs(packetSum-packet[packet.length-1])<=0.01; // arduino's precision
+};
 
 
 const parsePacket1 = (state,packet) => {

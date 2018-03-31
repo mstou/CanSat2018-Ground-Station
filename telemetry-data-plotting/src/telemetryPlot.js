@@ -20,7 +20,7 @@ class Telemetry extends Component {
       })
       .then( telemetryData => {
          const packet = telemetryData//.slice(0,counter); //testing
-         //counter = (counter+3)%100; //testing
+         //counter = (counter+1)%100; //testing
          this.setState(parseJSON(this.state,packet));
       })
       .catch(() => {});
