@@ -10,6 +10,7 @@ const initialState = () => {
     UV_Radiation : { data: [], units: 'mW/cm^2' },
     Soil_Moisture : { data: [], units: 'Percentage' },
     State : undefined,
+    plotsToRender : 1
   });
 }
 
