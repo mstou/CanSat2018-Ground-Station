@@ -1,8 +1,9 @@
 import React , {Component} from 'react';
-import {SinglePlot} from './components';
-import {initialState, parseJSON} from './lib';
+import {SinglePlot, Plot3D} from './components';
+import {initialState, parseJSON, sphericalToCartesian} from './lib';
+import Plot from 'react-plotly.js'
 
-//let counter = 0; //testing
+let counter = 0; //testing
 class Telemetry extends Component {
   constructor(props) {
     super(props);
@@ -19,8 +20,8 @@ class Telemetry extends Component {
         }
       })
       .then( telemetryData => {
-         const packet = telemetryData//.slice(0,counter); //testing
-         //counter = (counter+1)%100; //testing
+         const packet = telemetryData.slice(0,counter); //testing
+         counter = (counter+1)%100; //testing
          this.setState(parseJSON(this.state,packet));
       })
       .catch(() => {});
@@ -36,6 +37,7 @@ class Telemetry extends Component {
   );
   }
   render() {
+
     return (
       <div id="plots">
 
@@ -66,6 +68,7 @@ class Telemetry extends Component {
               title="Temperature"
               units={this.state.Temperature.units}
             />
+
           </div>) :
 
           (<div id="secondMissionPlots">

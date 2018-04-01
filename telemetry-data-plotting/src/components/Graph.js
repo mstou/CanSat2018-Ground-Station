@@ -20,5 +20,23 @@ const SinglePlot = ({dataToPlot, packets, title, units}) => (
     }}
   /> );
 
+const Plot3D = ({x,y,z,title}) => (
+  <Plot
+    data={
+      [{
+        x: x,
+        y: y,
+        z: z,
+        type: 'scatter3d',
+        mode: 'lines+points',
+        marker: {color: 'red'},
+    }]}
+    layout={
+      {width: 600,
+      height: 600,
+      title: title,
+    }}
+  />
+);
 
-export { SinglePlot };
+export { SinglePlot, Plot3D };
