@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "immutability-helper": "^2.6.6",
     "plotly.js": "^1.35.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
