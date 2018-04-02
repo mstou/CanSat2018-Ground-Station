@@ -21,6 +21,7 @@ class Telemetry extends Component {
       .then( telemetryData => {
          const packet = telemetryData;//.slice(0,counter); //testing
          //counter = (counter+1)%200; //testing
+         console.log("Fetched data ",packet);
          this.setState(parseJSON(this.state,packet));
       })
       .catch(() => {});

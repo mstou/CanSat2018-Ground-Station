@@ -1,4 +1,6 @@
+import update from 'immutability-helper';
 import { sphericalToCartesian } from './sphericalToCartesian';
+
 
 const initialState = () => {
   return Object.freeze({
@@ -17,10 +19,11 @@ const initialState = () => {
 }
 
 const packetIsValid = (packet) => {
-
   const packetSum = packet.slice(0,packet.length-1)
   .reduce( (sum, currentValue) => sum + currentValue );
+
   return Math.abs(packetSum-packet[packet.length-1])<=0.01; // arduino's precision
+
 };
 
 
@@ -28,63 +31,34 @@ const parsePacket1 = (state,packet) => {
   //<PACKET_COUNT>,1,<LATITUDE>,<LONGTITUDE>,<ALTITUDE>,<PRESSURE>,<TEMPERATURE>,<CHECK_SUM>
   const newCoordinates = sphericalToCartesian(packet[4],packet[3],packet[2]);
 
-  return Object.freeze({
-    ...state,
-    Height: {
-      ...state.Height,
-      data: [...state.Height.data,packet[4]]
-    },
-    Longtitude: {
-      ...state.Longtitude,
-      data: [...state.Longtitude.data,packet[3]]
-    },
-    Latitude: {
-      ...state.Latitude,
-      data: [...state.Latitude.data,packet[2]]
-    },
-    Pressure: {
-      ...state.Pressure,
-      data: [...state.Pressure.data,packet[5]]
-    },
-    Temperature: {
-      ...state.Temperature,
-      data: [...state.Temperature.data,packet[6]]
-    },
-    cartesianCoordinates : {
-      x : [...state.cartesianCoordinates.x,newCoordinates.x],
-      y : [...state.cartesianCoordinates.y,newCoordinates.y],
-      z : [...state.cartesianCoordinates.z,newCoordinates.z]
-    },
-    packets: {
-      data: [...state.packets.data,packet[0]]
-    }
-  });
+  return Object.freeze(
+    update(state, {
+      Height: {data: {$push: [packet[4]]} },
+      Longtitude: {data: {$push: [packet[3]]} },
+      Latitude: {data: {$push: [packet[2]]} },
+      Pressure: {data: {$push: [packet[5]]} },
+      Temperature: {data: {$push: [packet[6]]} },
+      cartesianCoordinates: {
+        x: {$push: [newCoordinates.x]},
+        y: {$push: [newCoordinates.y]},
+        z: {$push: [newCoordinates.z]}
+      },
+      packets: {data: {$push: [packet[0]]} }
+    })
+  );
 }
 
 const parsePacket2 = (state,packet) => {
   //<PACKET_COUNT>,2,<LATITUDE>,<LONGTITUDE>,<UV_RADIATION>,<SOIL MOISTURE>,<CHK_SUM>
-  return Object.freeze({
-    ...state,
-    Latitude : {
-      ...state.Latitude,
-      data : [...state.Latitude.data,packet[2]]
-    },
-    Longtitude : {
-      ...state.Longtitude,
-      data : [...state.Longtitude.data,packet[3]]
-    },
-    UV_Radiation : {
-      ...state.UV_Radiation,
-      data : [...state.UV_Radiation.data,packet[4]]
-    },
-    Soil_Moisture : {
-      ...state.Soil_Moisture,
-      data : [...state.Soil_Moisture.data,packet[5]]
-    },
-    packets: {
-      data: [...state.packets.data,packet[0]]
-    }
-  });
+
+  return Object.freeze(
+    update(state, {
+      Latitude: {data: {$push: [packet[2]]} },
+      Longtitude: {data: {$push: [packet[3]]} },
+      UV_Radiation: {data: {$push: [packet[4]]} },
+      Soil_Moisture: {data: {$push: [packet[5]]} },
+      packets: {data: {$push: [packet[0]]} }
+    }));
 }
 
 const parseData = (state, packet) => {
@@ -110,7 +84,7 @@ const parseJSON = (state, packets) => {
   return Object.freeze(
     newPackets.reduce(
     (intermediateState,newPacket) => parseData(intermediateState,newPacket),
-    state
+    {...state}
   ));
 }
 
