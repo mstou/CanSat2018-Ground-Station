@@ -1,3 +1,4 @@
+import { sphericalToCartesian } from './sphericalToCartesian';
 
 const initialState = () => {
   return Object.freeze({
@@ -9,6 +10,7 @@ const initialState = () => {
     Temperature : { data: [], units: '°C' },
     UV_Radiation : { data: [], units: 'mW/cm^2' },
     Soil_Moisture : { data: [], units: 'Percentage' },
+    cartesianCoordinates : { x: [], y: [], z: [] },
     State : undefined,
     plotsToRender : 1
   });
@@ -24,6 +26,8 @@ const packetIsValid = (packet) => {
 
 const parsePacket1 = (state,packet) => {
   //<PACKET_COUNT>,1,<LATITUDE>,<LONGTITUDE>,<ALTITUDE>,<PRESSURE>,<TEMPERATURE>,<CHECK_SUM>
+  const newCoordinates = sphericalToCartesian(packet[4],packet[3],packet[2]);
+
   return Object.freeze({
     ...state,
     Height: {
@@ -45,6 +49,11 @@ const parsePacket1 = (state,packet) => {
     Temperature: {
       ...state.Temperature,
       data: [...state.Temperature.data,packet[6]]
+    },
+    cartesianCoordinates : {
+      x : [...state.cartesianCoordinates.x,newCoordinates.x],
+      y : [...state.cartesianCoordinates.y,newCoordinates.y],
+      z : [...state.cartesianCoordinates.z,newCoordinates.z]
     },
     packets: {
       data: [...state.packets.data,packet[0]]

@@ -1,9 +1,8 @@
 import React , {Component} from 'react';
 import {SinglePlot, Plot3D} from './components';
-import {initialState, parseJSON, sphericalToCartesian} from './lib';
-import Plot from 'react-plotly.js'
+import {initialState, parseJSON} from './lib';
 
-let counter = 0; //testing
+//let counter = 0; //testing
 class Telemetry extends Component {
   constructor(props) {
     super(props);
@@ -20,8 +19,8 @@ class Telemetry extends Component {
         }
       })
       .then( telemetryData => {
-         const packet = telemetryData.slice(0,counter); //testing
-         counter = (counter+1)%100; //testing
+         const packet = telemetryData;//.slice(0,counter); //testing
+         //counter = (counter+1)%200; //testing
          this.setState(parseJSON(this.state,packet));
       })
       .catch(() => {});
@@ -60,6 +59,11 @@ class Telemetry extends Component {
               packets={this.state.packets.data}
               title="Height"
               units={this.state.Height.units}
+            />
+
+            <Plot3D
+              data={this.state.cartesianCoordinates}
+              title = "Descent Path"
             />
 
             <SinglePlot

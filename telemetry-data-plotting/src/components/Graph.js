@@ -20,13 +20,14 @@ const SinglePlot = ({dataToPlot, packets, title, units}) => (
     }}
   /> );
 
-const Plot3D = ({x,y,z,title}) => (
+const Plot3D = ({data ,title}) =>
+(
   <Plot
     data={
       [{
-        x: x,
-        y: y,
-        z: z,
+        x: data.x,
+        y: data.y,
+        z: data.z,
         type: 'scatter3d',
         mode: 'lines+points',
         marker: {color: 'red'},
