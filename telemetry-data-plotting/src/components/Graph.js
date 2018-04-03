@@ -1,7 +1,7 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
 
-const SinglePlot = ({dataToPlot, packets, title, units}) => (
+const Plot2D = ({dataToPlot, packets, title, units}) => (
   <Plot
     data={
       [{
@@ -40,4 +40,4 @@ const Plot3D = ({data ,title}) =>
   />
 );
 
-export { SinglePlot, Plot3D };
+export { Plot2D, Plot3D };

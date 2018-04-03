@@ -1,5 +1,5 @@
 import React , {Component} from 'react';
-import {SinglePlot, Plot3D} from './components';
+import {Plot2D, Plot3D} from './components';
 import {initialState, parseJSON} from './lib';
 
 //let counter = 0; //testing
@@ -48,14 +48,14 @@ class Telemetry extends Component {
         </div>
         { (this.state.plotsToRender===1) ?
           ( <div id="firstMissionPlots">
-              <SinglePlot
+              <Plot2D
               dataToPlot={this.state.Pressure.data}
               packets={this.state.packets.data}
               title="Barometric Pressure"
               units={this.state.Pressure.units}
             />
 
-            <SinglePlot
+            <Plot2D
               dataToPlot={this.state.Height.data}
               packets={this.state.packets.data}
               title="Height"
@@ -67,7 +67,7 @@ class Telemetry extends Component {
               title = "Descent Path"
             />
 
-            <SinglePlot
+            <Plot2D
               dataToPlot={this.state.Temperature.data}
               packets={this.state.packets.data}
               title="Temperature"
@@ -77,14 +77,14 @@ class Telemetry extends Component {
           </div>) :
 
           (<div id="secondMissionPlots">
-            <SinglePlot
+            <Plot2D
               dataToPlot={this.state.UV_Radiation.data}
               packets={this.state.packets.data}
               title="UV Radiation"
               units={this.state.UV_Radiation.units}
             />
 
-            <SinglePlot
+            <Plot2D
               dataToPlot={this.state.Soil_Moisture.data}
               packets={this.state.packets.data}
               title="Soil_Moisture"
