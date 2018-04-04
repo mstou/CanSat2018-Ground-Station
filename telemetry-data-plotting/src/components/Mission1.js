@@ -9,12 +9,12 @@ const Mission1 = ( {state} ) => (
   <div id="StatusBar">
     <StatusBar
       dataToDisplay = { [
-        {name: "status", value: "on-flight"},
-        {name: "longtitude", value: lastElementOfArray(state.Longtitude.data)},
-        {name: "latitude", value: lastElementOfArray(state.Latitude.data)},
-        {name: "temperature", value: lastElementOfArray(state.Temperature.data)},
-        {name: "height", value: lastElementOfArray(state.Height.data) },
-        {name: "pressure", value: lastElementOfArray(state.Pressure.data) }
+        {name: "Status", value: "on-flight", units: ""},
+        {name: "Latitude", value: lastElementOfArray(state.Latitude.data), units: state.Latitude.units},
+        {name: "Longtitude", value: lastElementOfArray(state.Longtitude.data), units: state.Longtitude.units},
+        {name: "Temperature", value: lastElementOfArray(state.Temperature.data), units: state.Temperature.units},
+        {name: "Height", value: lastElementOfArray(state.Height.data), units: state.Height.units},
+        {name: "Pressure", value: lastElementOfArray(state.Pressure.data), units: state.Pressure.units}
       ]}
     />
   </div>
