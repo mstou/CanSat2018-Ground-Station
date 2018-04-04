@@ -1,14 +1,10 @@
 import React from 'react';
 
 class StatusBar extends React.Component {
-    constructor(props) {
-      super(props);
-    }
-
     render() {
       return (
         <div id="statusBar">
-          {this.props.dataToDisplay.map(data => <p id={data.name}> {data.name}: {data.value} </p> )}
+          {this.props.dataToDisplay.map(data => <p key={data.name}> {data.name}: {data.value} </p> )}
         </div>
       );
     }
