@@ -33,7 +33,7 @@ const Plot3D = ({data ,title}) =>
         marker: {color: 'red'},
     }]}
     layout={
-      {width: 600,
+      {width: 500,
       height: 600,
       title: title,
     }}

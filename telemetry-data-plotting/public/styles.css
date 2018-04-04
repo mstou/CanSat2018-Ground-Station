@@ -1,0 +1,46 @@
+* {
+  font-family: 'Jura', sans-serif;
+}
+
+#logo {
+  float: left;
+  height: 10%;
+  width: 10%;
+  margin-left: 10%;
+}
+
+#title {
+  text-align: center;
+  margin-top: 2.5%;
+  margin-right: -10% ;
+}
+
+header {
+  border-bottom: 1px solid #818181;
+  position: relative;
+  top: 0%;
+  overflow: hidden;
+}
+
+#content {
+  clear: left;
+}
+
+#buttons button{
+  margin-right:5px;
+  margin-bottom: 10px;
+  border-radius: 50px;
+
+}
+
+#StatusBar {
+  font-size: 20px;
+  line-height: 5px;
+  border-top: 1px solid #818181;
+  border-bottom: 1px solid #818181;
+  width: 300px;
+}
+
+.plot {
+  float: left;
+}

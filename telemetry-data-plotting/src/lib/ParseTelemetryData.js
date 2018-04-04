@@ -1,6 +1,6 @@
 import update from 'immutability-helper';
 import { sphericalToCartesian } from './sphericalToCartesian';
-
+import { lastElementOfArray } from './lastElementOfArray';
 
 const initialState = () => {
   return Object.freeze({
@@ -79,7 +79,7 @@ const parseJSON = (state, packets) => {
     .map((value) => parseFloat(value))
   )
   .filter( (packet) => {
-    return (state.packets.data.length===0) || (packet[0] > state.packets.data[state.packets.data.length-1]);
+    return (state.packets.data.length===0) || (packet[0] > lastElementOfArray(state.packets.data));
   });
   return Object.freeze(
     newPackets.reduce(
