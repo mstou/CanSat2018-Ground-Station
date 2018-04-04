@@ -24,19 +24,27 @@ header {
 
 #content {
   clear: left;
+  margin-left: 50px;
 }
 
 #buttons button{
-  margin-right:5px;
-  margin-bottom: 10px;
-  border-radius: 50px;
-
+    background-color: #fff;
+    border: 1px solid black;
+    border-radius: 10px;
+    color: black;
+    padding: 10px 27px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 4px;
+    cursor: pointer;
+    transition: font-size, 0.5s;
 }
 
 #StatusBar {
   font-size: 20px;
   line-height: 5px;
-  border-top: 1px solid #818181;
   border-bottom: 1px solid #818181;
   width: 350px;
 }
