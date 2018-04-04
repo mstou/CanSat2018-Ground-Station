@@ -34,7 +34,7 @@ const Plot3D = ({data ,title}) =>
     }]}
     layout={
       {width: 500,
-      height: 600,
+      height: 480,
       title: title,
     }}
   />

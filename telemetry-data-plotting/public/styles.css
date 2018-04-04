@@ -38,9 +38,13 @@ header {
   line-height: 5px;
   border-top: 1px solid #818181;
   border-bottom: 1px solid #818181;
-  width: 300px;
+  width: 350px;
 }
 
 .plot {
   float: left;
+}
+
+#cartesianCoordinates {
+  margin-top: -20px;
 }
