@@ -1,6 +1,7 @@
 import React from 'react';
 import {Plot2D, Plot3D } from './Graph';
 import { StatusBar } from './StatusBar';
+import { lastElementOfArray } from '../lib';
 
 const Mission1 = ( {state} ) => (
   <div id="firstMissionPlots">
@@ -31,8 +32,8 @@ const Mission1 = ( {state} ) => (
     />
     <StatusBar
       dataToDisplay = { [
-        {name: "height", value: state.Height.data[state.Height.data.length-1]},
-        {name: "pressure", value: state.Pressure.data[state.Pressure.data.length-1]}
+        {name: "height", value: lastElementOfArray(state.Height.data) },
+        {name: "pressure", value: lastElementOfArray(state.Pressure.data) }
       ]}
     />
 

@@ -1,3 +1,4 @@
-import {initialState, parseJSON} from './ParseTelemetryData';
-import {sphericalToCartesian} from './sphericalToCartesian';
-export {initialState, parseJSON, sphericalToCartesian};
+import { initialState, parseJSON } from './ParseTelemetryData';
+import { sphericalToCartesian } from './sphericalToCartesian';
+import { lastElementOfArray } from './lastElementOfArray';
+export { initialState, parseJSON, sphericalToCartesian, lastElementOfArray };
