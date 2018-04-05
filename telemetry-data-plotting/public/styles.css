@@ -58,7 +58,21 @@ header {
     margin: 4px 4px;
     margin-bottom: 15px;
     cursor: pointer;
-    transition: font-size, 0.5s;
+}
+
+#buttons #ButtonClicked {
+  background-color: #fff;
+  border: 2px solid red;
+  border-radius: 10px;
+  color: black;
+  padding: 10px 27px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 4px;
+  margin-bottom: 15px;
+  cursor: pointer;
 }
 
 #StatusBar {

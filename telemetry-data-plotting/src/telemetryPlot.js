@@ -39,8 +39,17 @@ class Telemetry extends Component {
 
         <div id="buttons">
             <p>Choose which plots you want to see :</p>
-            <button onClick={() => this.changePlots(this.state,1)}> 1st mission </button>
-            <button onClick={() => this.changePlots(this.state,2)}> 2nd mission </button>
+            {this.state.plotsToRender===1 ?
+              ( <div>
+                <button id="ButtonClicked" onClick={() => this.changePlots(this.state,1)}> 1st mission </button>
+                <button onClick={() => this.changePlots(this.state,2)}> 2nd mission </button>
+              </div>):
+
+              ( <div>
+                <button onClick={() => this.changePlots(this.state,1)}> 1st mission </button>
+                <button id="ButtonClicked" onClick={() => this.changePlots(this.state,2)}> 2nd mission </button>
+               </div>)
+           }
         </div>
           { ( this.state.plotsToRender === 1 ) ? <Mission1 state={this.state}/> : <Mission2  state={this.state}/> }
         </div>
