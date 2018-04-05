@@ -13,7 +13,7 @@ const initialState = () => {
     UV_Radiation : { data: [], units: 'mW/cm^2' },
     Soil_Moisture : { data: [], units: 'Percentage' },
     cartesianCoordinates : { x: [], y: [], z: [] },
-    State : undefined,
+    Status : undefined,
     plotsToRender : 1
   });
 }
@@ -43,7 +43,8 @@ const parsePacket1 = (state,packet) => {
         y: {$push: [newCoordinates.y]},
         z: {$push: [newCoordinates.z]}
       },
-      packets: {data: {$push: [packet[0]]} }
+      packets: {data: {$push: [packet[0]]} },
+      Status : {$set: 1}
     })
   );
 }
@@ -57,7 +58,8 @@ const parsePacket2 = (state,packet) => {
       Longtitude: {data: {$push: [packet[3]]} },
       UV_Radiation: {data: {$push: [packet[4]]} },
       Soil_Moisture: {data: {$push: [packet[5]]} },
-      packets: {data: {$push: [packet[0]]} }
+      packets: {data: {$push: [packet[0]]} },
+      Status: {$set : 2}
     }));
 }
 
