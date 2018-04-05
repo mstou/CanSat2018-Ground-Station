@@ -2,7 +2,6 @@ import React , { Component } from 'react';
 import { Mission1, Mission2 } from './components';
 import { initialState, parseJSON } from './lib';
 
-//let counter = 0; //testing
 class Telemetry extends Component {
   constructor(props) {
     super(props);
@@ -19,9 +18,7 @@ class Telemetry extends Component {
         }
       })
       .then( telemetryData => {
-         const packet = telemetryData;//.slice(0,counter); //testing
-         //counter = (counter+1)%200; //testing
-         //console.log("Fetched data ",packet);
+         const packet = telemetryData;
          this.setState(parseJSON(this.state,packet));
       })
       .catch(() => {});

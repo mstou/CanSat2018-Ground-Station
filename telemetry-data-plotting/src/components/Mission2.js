@@ -8,7 +8,7 @@ const Mission2 = ({ state }) => (
     <div id="StatusBar">
       <StatusBar
         dataToDisplay = { [
-          {name: "Status", value: "landed", units: "" },
+          {name: "Status", value: (state.Status===1)? "on-flight": "landed", units: "" },
           {name: "Latitude", value: lastElementOfArray(state.Latitude.data), units: state.Latitude.units},
           {name: "Longtitude", value: lastElementOfArray(state.Longtitude.data), units: state.Longtitude.units},
           {name: "Soil moisture", value: lastElementOfArray(state.Soil_Moisture.data), units: "%"},
