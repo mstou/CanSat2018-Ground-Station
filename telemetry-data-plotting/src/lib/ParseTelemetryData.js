@@ -4,7 +4,7 @@ import { lastElementOfArray } from './lastElementOfArray';
 
 const initialState = () => {
   return Object.freeze({
-    packets : { data: [], units: 's' },
+    packets : { data: [0], units: 's' },
     Height : { data: [], units: 'm' },
     Pressure : { data: [], units: 'hPa' },
     Longtitude : { data: [], units: '°' },
@@ -64,11 +64,12 @@ const parsePacket2 = (state,packet) => {
 }
 
 const parseData = (state, packet) => {
+  console.log("parsing packet:",packet);
   if(!packetIsValid(packet)){
     console.log("Invalid packet");
     return state;
   }
-
+  if(packet.length!==7 || packet.length!==8) return state;
   return (packet[1]===1) ? parsePacket1(state,packet) : parsePacket2(state,packet);
 
 };
@@ -83,6 +84,7 @@ const parseJSON = (state, packets) => {
   .filter( (packet) => {
     return (state.packets.data.length===0) || (packet[0] > lastElementOfArray(state.packets.data));
   });
+  console.log("new packets",newPackets);
   return Object.freeze(
     newPackets.reduce(
     (intermediateState,newPacket) => parseData(intermediateState,newPacket),

@@ -9,7 +9,7 @@ class Telemetry extends Component {
     this.state = initialState();
 
     setInterval(() => {
-      fetch('http://localhost:3000/TelemetryData.json',{cache: "reload"})
+      fetch('http://localhost:5000/TelemetryData.json',{cache: "reload"})
       .then(response => {
          try{
            return response.json();
@@ -18,8 +18,9 @@ class Telemetry extends Component {
         }
       })
       .then( telemetryData => {
-         const packet = telemetryData;
-         this.setState(parseJSON(this.state,packet));
+         console.log(telemetryData);
+         console.log("application state=",this.state);
+         this.setState(parseJSON(this.state,telemetryData));
       })
       .catch(() => {});
     }, 1000);
