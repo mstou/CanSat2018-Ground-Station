@@ -8,7 +8,7 @@
  - George Rapakoulias
  - Miltiadis Stouras
 
-Our team participates in the [CanSat in Greece 2018](https://cansat.gr/) competition.
+Our team won 1st prize in the [CanSat in Greece 2018](https://cansat.gr/) competition.
 
 # Ground Station
 ![alt text](demo.png)
