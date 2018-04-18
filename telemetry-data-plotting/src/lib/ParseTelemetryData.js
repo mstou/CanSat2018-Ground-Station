@@ -4,7 +4,7 @@ import { lastElementOfArray } from './lastElementOfArray';
 
 const initialState = () => {
   return Object.freeze({
-    packets : { data: [0], units: 's' },
+    packets : { data: [], units: 's' },
     Height : { data: [], units: 'm' },
     Pressure : { data: [], units: 'hPa' },
     Longtitude : { data: [], units: '°' },
@@ -69,7 +69,7 @@ const parseData = (state, packet) => {
     console.log("Invalid packet");
     return state;
   }
-  if(packet.length!==7 || packet.length!==8) return state;
+
   return (packet[1]===1) ? parsePacket1(state,packet) : parsePacket2(state,packet);
 
 };
