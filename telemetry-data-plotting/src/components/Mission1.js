@@ -9,7 +9,6 @@ const Mission1 = ( {state} ) => (
   <div id="StatusBar">
     <StatusBar
       dataToDisplay = { [
-        {name: "Status", value:  (state.Status===1) ? "on-flight" : "landed", units: ""},
         {name: "Latitude", value: lastElementOfArray(state.Latitude.data), units: state.Latitude.units},
         {name: "Longtitude", value: lastElementOfArray(state.Longtitude.data), units: state.Longtitude.units},
         {name: "Temperature", value: lastElementOfArray(state.Temperature.data), units: state.Temperature.units},
@@ -27,6 +26,7 @@ const Mission1 = ( {state} ) => (
       units={state.Pressure.units}
     />
  </div>
+
 
  <div id="height" className="plot">
     <Plot2D
@@ -52,6 +52,53 @@ const Mission1 = ( {state} ) => (
       title = "Descent Path"
     />
  </div>
+
+ <div id="humidity" className="plot">
+      <Plot2D
+      dataToPlot={state.Humidity.data}
+      packets={state.packets.data}
+      title="Humidity"
+      units={state.Humidity.units}
+    />
+ </div>
+
+ <div id="uva" className="plot">
+      <Plot2D
+      dataToPlot={state.UVa.data}
+      packets={state.packets.data}
+      title="UVa"
+      units={state.UVa.units}
+    />
+ </div>
+
+ <div id="uvb" className="plot">
+      <Plot2D
+      dataToPlot={state.UVb.data}
+      packets={state.packets.data}
+      title="UVb"
+      units={state.UVb.units}
+    />
+ </div>
+
+ <div id="uvindex" className="plot">
+      <Plot2D
+      dataToPlot={state.UVindex.data}
+      packets={state.packets.data}
+      title="UV Index"
+      units={state.UVindex.units}
+    />
+ </div>
+
+ <div id="methane" className="plot">
+      <Plot2D
+      dataToPlot={state.Methane.data}
+      packets={state.packets.data}
+      title="Methane Concentration"
+      units={state.Methane.units}
+    />
+ </div>
+
+
 
 </div>
 );

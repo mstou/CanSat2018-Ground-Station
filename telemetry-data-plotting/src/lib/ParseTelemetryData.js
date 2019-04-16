@@ -10,21 +10,21 @@ const initialState = () => {
     Longtitude : { data: [], units: '°' },
     Latitude : { data: [], units: '°' },
     Temperature : { data: [], units: '°C' },
-    Humidity : {data: [], units: ""},
+    Humidity : {data: [], units: "%"},
     UVa : { data: [], units: 'mW/cm^2' },
     UVb : { data: [], units: 'mW/cm^2' },
-    UVindex : { data: [], units: ""},
-    Methane : {data: [], units: ""},
+    UVindex : { data: [], units: "mW/cm^2"},
+    Methane : {data: [], units: "ppm"},
     cartesianCoordinates : { x: [], y: [], z: [] },
   });
 }
-
-const packetIsValid = (packet) => {
-  const packetSum = packet.slice(0,packet.length-1)
-  .reduce( (sum, currentValue) => sum + currentValue );
-
-  return Math.abs(packetSum-packet[packet.length-1])<=0.01; // arduino's precision
-};
+//
+// const packetIsValid = (packet) => {
+//   const packetSum = packet.slice(0,packet.length-1)
+//   .reduce( (sum, currentValue) => sum + currentValue );
+//
+//   return Math.abs(packetSum-packet[packet.length-1])<=0.01; // arduino's precision
+// };
 
 
 const parsePacket = (state,packet) => {
