@@ -46,12 +46,6 @@ const Mission1 = ( {state} ) => (
     />
  </div>
 
- <div id="cartesianCoordinates" className="plot">
-    <Plot3D
-      data={state.cartesianCoordinates}
-      title = "Descent Path"
-    />
- </div>
 
  <div id="humidity" className="plot">
       <Plot2D
@@ -98,6 +92,12 @@ const Mission1 = ( {state} ) => (
     />
  </div>
 
+ <div id="cartesianCoordinates" className="plot">
+    <Plot3D
+      data={state.cartesianCoordinates}
+      title = "Descent Path"
+    />
+ </div>
 
 
 </div>
